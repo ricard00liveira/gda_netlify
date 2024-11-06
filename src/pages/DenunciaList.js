@@ -27,7 +27,19 @@ const DenunciasList = () => {
         {denuncias.map((denuncia) => (
           <li key={denuncia.numero}>
             <p>
-              <strong>Descrição:</strong> {denuncia.descricao}
+              <strong>Descrição:</strong>
+              <span
+                style={{
+                  color:
+                    denuncia.status === "Pendente"
+                      ? "red"
+                      : denuncia.status === "Resolvido"
+                      ? "green"
+                      : "black",
+                }}
+              >
+                {denuncia.status}
+              </span>
             </p>
             <p>
               <strong>Status:</strong> {denuncia.status}
