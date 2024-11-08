@@ -9,7 +9,9 @@ const DenunciasList = () => {
   useEffect(() => {
     const fetchDenuncias = async () => {
       try {
-        const response = await api.get("http://127.0.0.1:8000/api/denuncias/");
+        const response = await api.get(
+          "https://gda-app-22cb3b24bc60.herokuapp.com/api/denuncias/"
+        );
         setDenuncias(response.data);
       } catch (error) {
         console.error("Erro ao buscar denúncias:", error);

@@ -12,10 +12,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await api.post("http://127.0.0.1:8000/api/token/", {
-        cpf,
-        password,
-      });
+      const response = await api.post(
+        "https://gda-app-22cb3b24bc60.herokuapp.com/api/token/",
+        {
+          cpf,
+          password,
+        }
+      );
 
       const { access, refresh } = response.data;
       localStorage.setItem("access_token", access);
