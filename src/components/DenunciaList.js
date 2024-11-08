@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axiosConfig";
+import { useNavigate } from "react-router-dom";
 
 const DenunciasList = () => {
   const [denuncias, setDenuncias] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Função para buscar as denúncias
     const fetchDenuncias = async () => {
       try {
-        const response = await axios.get(
-          "https://gda-app-22cb3b24bc60.herokuapp.com/api/denuncias/"
-        );
+        const response = await api.get("http://127.0.0.1:8000/api/denuncias/");
         setDenuncias(response.data);
       } catch (error) {
         console.error("Erro ao buscar denúncias:", error);
@@ -19,6 +18,12 @@ const DenunciasList = () => {
 
     fetchDenuncias();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    navigate("/home");
+  };
 
   return (
     <div>
@@ -51,6 +56,23 @@ const DenunciasList = () => {
           </li>
         ))}
       </ul>
+      <button
+        onClick={() => {
+          navigate("/home");
+        }}
+        style={{ marginTop: "20px" }}
+      >
+        Home
+      </button>
+      <button
+        onClick={() => navigate("/profile")}
+        style={{ marginTop: "20px" }}
+      >
+        Perfil
+      </button>
+      <button onClick={handleLogout} style={{ marginTop: "20px" }}>
+        Sair
+      </button>
     </div>
   );
 };
