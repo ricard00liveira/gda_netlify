@@ -9,10 +9,12 @@ const Profile = () => {
   useEffect(() => {
     const fetchPerfil = async () => {
       try {
-        const response = await api.get("http://127.0.0.1:8000/api/profile/");
+        const response = await api.get(
+          process.env.REACT_APP_API_URL + "profile/"
+        );
         setPerfil(response.data);
       } catch (error) {
-        console.error("Erro ao buscar denúncias:", error);
+        console.error("Erro ao buscar profile:", error);
       }
     };
 
