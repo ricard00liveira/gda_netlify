@@ -13,7 +13,7 @@ const Login = () => {
 
     try {
       const response = await api.post(
-        "https://gda-app-22cb3b24bc60.herokuapp.com/api/token/",
+        process.env.REACT_APP_API_URL + "token/",
         {
           cpf,
           password,

@@ -10,11 +10,11 @@ const Profile = () => {
     const fetchPerfil = async () => {
       try {
         const response = await api.get(
-          "https://gda-app-22cb3b24bc60.herokuapp.com/api/profile/"
+          process.env.REACT_APP_API_URL + "profile/"
         );
         setPerfil(response.data);
       } catch (error) {
-        console.error("Erro ao buscar denúncias:", error);
+        console.error("Erro ao buscar profile:", error);
       }
     };
 
