@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# Como Instalar e Executar o Front-End do GDA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi criado com [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Pré-requisitos
 
-In the project directory, you can run:
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
-### `npm start`
+- [Node.js](https://nodejs.org/) (versão 16 ou superior recomendada)
+- [npm](https://www.npmjs.com/) (vem junto com o Node.js)
+- Um editor de código, como [VS Code](https://code.visualstudio.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Passo a Passo para Instalar o Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Clone o Repositório:**
 
-### `npm test`
+   Abra o terminal e execute o seguinte comando para clonar o repositório do projeto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
 
-### `npm run build`
+   Substitua `<URL_DO_REPOSITORIO>` pela URL do seu repositório.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Acesse o Diretório do Projeto:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   Navegue até o diretório clonado:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   cd <NOME_DO_DIRETORIO>
+   ```
 
-### `npm run eject`
+   Substitua `<NOME_DO_DIRETORIO>` pelo nome do diretório onde o projeto foi clonado.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Instale as Dependências:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Execute o seguinte comando para instalar todas as dependências necessárias:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```bash
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Configuração de Variáveis de Ambiente:**
 
-## Learn More
+   Crie um arquivo `.env` na raiz do projeto e configure as variáveis necessárias. Por exemplo:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ```env
+   REACT_APP_API_URL=http://localhost:8000/api/
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   Certifique-se de ajustar o valor conforme o ambiente de desenvolvimento ou produção.
 
-### Code Splitting
+## Como Executar o Projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Inicie o Servidor de Desenvolvimento:**
 
-### Analyzing the Bundle Size
+   Execute o comando:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ```bash
+   npm start
+   ```
 
-### Making a Progressive Web App
+   O aplicativo será iniciado em modo de desenvolvimento. Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. **Compilar para Produção (Opcional):**
 
-### Advanced Configuration
+   Para criar uma versão otimizada para produção, use:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   npm run build
+   ```
 
-### Deployment
+   O comando criará os arquivos na pasta `build`, prontos para deploy.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Solução de Problemas
 
-### `npm run build` fails to minify
+- Caso ocorra o erro relacionado a `digital envelope routines`, use o comando:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ```bash
+  node --openssl-legacy-provider ./node_modules/react-scripts/scripts/start.js
+  ```
+
+- Para corrigir vulnerabilidades, execute:
+
+  ```bash
+  npm audit fix
+  ```
+
+---
+
+### Contato
+
+Se tiver dúvidas ou encontrar problemas, sinta-se à vontade para abrir uma issue no repositório ou entrar em contato com o responsável pelo projeto.

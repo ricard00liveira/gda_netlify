@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const DenunciasList = () => {
   const [user, setUser] = useState("");
@@ -37,8 +38,13 @@ const DenunciasList = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setDenuncias((prevDenuncias) => [...prevDenuncias, response.data]);
-      closeModal();
+      if (response.status === 201) {
+        toast.success("Denúncia adicionada com sucesso!", {
+          autoClose: 1000,
+        });
+        setDenuncias((prevDenuncias) => [...prevDenuncias, response.data]);
+        closeModal();
+      }
     } catch (error) {
       console.error("Erro ao adicionar denúncia:", error);
     }
@@ -87,28 +93,61 @@ const DenunciasList = () => {
   };
 
   const remover = async (id) => {
-    const confirmDelete = window.confirm(
-      `Tem certeza que deseja remover a denúncia número ${id}?`
-    );
-    if (confirmDelete) {
+    const confirmarDelecao = async () => {
       try {
         const token = localStorage.getItem("access_token");
-        await api.delete(
-          process.env.REACT_APP_API_URL + `denuncias/delete/${id}/`,
+        const response = await api.delete(
+          process.env.REACT_APP_API_URL + `denuncias/delete/${id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setDenuncias(denuncias.filter((denuncia) => denuncia.id !== id));
+        if (response.status === 200 || response.status === 204) {
+          toast.dismiss();
+          setDenuncias((prevDenuncias) => {
+            console.log("Estado antes da exclusão:", prevDenuncias);
+            return prevDenuncias.filter((denuncia) => denuncia.numero !== id);
+          });
+
+          toast.success(`Denúncia ${id} removida com sucesso!`, {
+            autoClose: 1000,
+          });
+        }
       } catch (error) {
         console.error("Erro ao deletar denúncia:", error);
       }
-    }
+    };
+    const cancelarDelecao = () => {
+      console.log("Ação cancelada.");
+      toast.dismiss();
+    };
+    toast.warning(
+      <div>
+        <p>Tem certeza que deseja remover a denúncia {id}?</p>
+        <div className="flex gap-2 mt-2">
+          <button
+            onClick={confirmarDelecao}
+            className="bg-red-500 text-white px-2 py-1 rounded text-sm"
+          >
+            Confirmar
+          </button>
+          <button
+            onClick={cancelarDelecao}
+            className="bg-gray-300 text-black px-2 py-1 rounded text-sm"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>,
+      { autoClose: false, position: "top-center" }
+    );
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Olá, {user.nome}.</h2>
+      <h2 className="text-xl font-bold mb-4">
+        Olá, {user.tipo === "adm" ? `${user.nome} (Administrador)` : user.nome}.{" "}
+      </h2>
       <button
         onClick={openModal}
         className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
@@ -173,7 +212,13 @@ const DenunciasList = () => {
             className="mb-4 p-4 border rounded shadow-sm"
           >
             <p>
-              <strong>Número:</strong> {denuncia.numero}
+              <strong>Número:</strong> {denuncia.numero}{" "}
+              <button
+                onClick={() => remover(denuncia.numero)}
+                className="bg-red-900 text-white px-1 py-1 rounded text-sm mt-1"
+              >
+                Deletar
+              </button>
             </p>
             <p>
               <strong>Descrição:</strong> {denuncia.descricao}
@@ -196,12 +241,6 @@ const DenunciasList = () => {
               <strong>Data:</strong>{" "}
               {new Date(denuncia.data).toLocaleDateString()}
             </p>
-            <button
-              onClick={() => remover(denuncia.numero)}
-              className="bg-red-500 text-white px-4 py-2 rounded mt-2"
-            >
-              Deletar
-            </button>
           </li>
         ))}
       </ul>
@@ -227,6 +266,7 @@ const DenunciasList = () => {
           Sair
         </button>
       </div>
+      <ToastContainer position="top-center" />
     </div>
   );
 };
