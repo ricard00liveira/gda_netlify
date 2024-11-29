@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Home from "./components/Home";
-import DenunciaList from "./components/DenunciaList";
+import Main from "./components/Main";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
@@ -19,10 +19,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route
-          path="/list-denuncias"
+          path="/main"
           element={
             <PrivateRoute>
-              <DenunciaList />
+              <Main />
             </PrivateRoute>
           }
         />
