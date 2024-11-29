@@ -14,11 +14,7 @@ const Home = () => {
       navigate("/login");
     }
   };
-
-  const goToDenunciasList = () => {
-    navigate("/main");
-  };
-
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <h1 className="text-4xl font-bold text-green-600 mb-8">
@@ -26,18 +22,12 @@ const Home = () => {
       </h1>
       <button
         onClick={handleLogin}
-        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 mb-4"
+        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 mb-4"
       >
         Acessar
       </button>
-      <button
-        onClick={goToDenunciasList}
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-      >
-        Ver Lista de Denúncias
-      </button>
-    </div>
-  );
+      </div>
+    );
 };
 
 export default Home;

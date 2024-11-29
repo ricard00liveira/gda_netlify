@@ -66,9 +66,14 @@ const Login = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          <button type="submit" className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Entrar</button>
-          {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+          <div className="flex justify-center">
+            <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Entrar</button>
+          </div>
+          {error && <p className="mt-2 text-sm text-red-600 text-center">{error}</p>}
         </form>
+        <div className="flex justify-center mt-4">
+          <button onClick={() => navigate('/home')} className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">Voltar</button>
+        </div>
       </div>
     </div>
   );
