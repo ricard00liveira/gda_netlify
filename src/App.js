@@ -8,6 +8,7 @@ import {
 import Home from "./components/Home";
 import Main from "./components/Main";
 import Login from "./components/Login";
+import DenunciasList from "./components/Denuncias";
 import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile";
 
@@ -23,6 +24,14 @@ function App() {
           element={
             <PrivateRoute>
               <Main />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/denuncias"
+          element={
+            <PrivateRoute>
+              <DenunciasList />
             </PrivateRoute>
           }
         />
