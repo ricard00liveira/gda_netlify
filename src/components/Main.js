@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/axiosConfig";
+//import api from "../utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const Main = () => {
   const [user, setUser] = useState("");
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const buscarUsuario = async () => {
